@@ -2160,6 +2160,46 @@ body:not(.home) {
   overflow-x: auto;
 }
 
+.modal{
+  z-index: 9999;
+}
+.modal-fullscreen .modal-header{
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+.modal-fullscreen .modal-content{
+  padding: 0;
+}
+.modal-fullscreen .modal-content .form-select,
+.modal-fullscreen .modal-content .form-control{
+  border-radius: 30px;
+}
+.modal-fullscreen .color_wrap{
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.modal-fullscreen .color_wrap .hover_text{
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  padding: 10px;
+  max-width: 70%;
+  display: none;
+  font-size: 12px;
+  width: max-content;
+}
+.modal-fullscreen .color_wrap:hover .hover_text{
+  display: block;
+}
+.modal-fullscreen .color_wrap img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 @media (max-width: 1199.98px) {
   .product_details .details_wrap .select_color_wrap {
     flex-wrap: wrap;

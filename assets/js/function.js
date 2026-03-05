@@ -34,31 +34,34 @@ $(document).ready(function () {
     $(this).closest("button").remove();
   });
 
- $(".range").each(function() {
+  $(".range").each(function () {
     updateSlider($(this));
   });
 
-  $(".range").on("input", function() {
+  $(".range").on("input", function () {
     updateSlider($(this));
   });
 
   function updateSlider($slider) {
-
     let value = $slider.val();
     let min = $slider.attr("min");
     let max = $slider.attr("max");
 
-    let percent = (value - min) / (max - min) * 100;
+    let percent = ((value - min) / (max - min)) * 100;
 
     $slider.css(
       "background",
-      "linear-gradient(to right, #5b5bf7 " + percent + "%, #ddd " + percent + "%)"
+      "linear-gradient(to right, #5b5bf7 " +
+        percent +
+        "%, #ddd " +
+        percent +
+        "%)",
     );
 
     $slider.siblings(".value").text(value);
   }
 
-  $(".disable_accordion").on("change", function() {
+  $(".disable_accordion").on("change", function () {
     let $accItem = $(this).closest(".acc_item");
     let $body = $accItem.find(".toggle_elem");
     let $heading = $accItem.find(".acc_heading");
@@ -72,44 +75,39 @@ $(document).ready(function () {
     }
   });
 
-  $(".toggle_item").on("click", function() {
+  $(".toggle_item").on("click", function () {
     $(this).next().toggle();
-    $(this).toggleClass('active');
+    $(this).toggleClass("active");
   });
 
-  $(".plus").click(function(){
+  $(".plus").click(function () {
     let qty = parseInt($(".qty-input").val());
     $(".qty-input").val(qty + 1);
   });
 
-  $(".minus").click(function(){
+  $(".minus").click(function () {
     let qty = parseInt($(".qty-input").val());
-    if(qty > 1){
+    if (qty > 1) {
       $(".qty-input").val(qty - 1);
     }
   });
 
-  $(".select_color").on("change", function() {
-
+  $(".select_color").on("change", function () {
     let selectedText = $(this).find("option:selected").text();
 
-    $(this)
-      .closest(".acc_body")
-      .find(".selected_choice b")
-      .text(selectedText);
-
+    $(this).closest(".acc_body").find(".selected_choice b").text(selectedText);
   });
-  $('.testimonial-carousel').owlCarousel({
-    loop:true,
-    margin:30,
-    dots:true,
-    nav:false,
-    responsive:{
-        0:{ items:1 },
-        768:{ items:2 },
-        1200:{ items:3 }
-    }
-});
+  $(".testimonial-carousel").owlCarousel({
+    loop: true,
+    margin: 30,
+    dots: true,
+    nav: false,
+    responsive: {
+      0: { items: 1 },
+      768: { items: 2 },
+      1200: { items: 3 },
+    },
+  });
 
   $(".sub_items li").click(function () {
     var keywordText = $(this).text().trim();
@@ -181,26 +179,28 @@ $(document).ready(function () {
   }
   toggleOwl();
 
-  $(".zoom-container").on("mousemove", function(e){
+  $(".zoom-container")
+    .on("mousemove", function (e) {
+      let containerOffset = $(this).offset();
+      let x = e.pageX - containerOffset.left;
+      let y = e.pageY - containerOffset.top;
 
-  let containerOffset = $(this).offset();
-  let x = e.pageX - containerOffset.left;
-  let y = e.pageY - containerOffset.top;
+      let width = $(this).width();
+      let height = $(this).height();
 
-  let width = $(this).width();
-  let height = $(this).height();
+      let moveX = (x / width) * 100;
+      let moveY = (y / height) * 100;
 
-  let moveX = (x / width) * 100;
-  let moveY = (y / height) * 100;
-
-  $(this).find("img").css({
-    "transform-origin": moveX + "% " + moveY + "%",
-    "transform": "scale(2)"
-  });
-
-  }).on("mouseleave", function(){
-    $(this).find("img").css("transform", "scale(1)");
-  });
+      $(this)
+        .find("img")
+        .css({
+          "transform-origin": moveX + "% " + moveY + "%",
+          transform: "scale(2)",
+        });
+    })
+    .on("mouseleave", function () {
+      $(this).find("img").css("transform", "scale(1)");
+    });
 
   var slider = $(".customers_slider");
 
@@ -209,24 +209,32 @@ $(document).ready(function () {
     margin: 30,
     nav: false,
     dots: false,
-    responsive:{
-      0:{ items:1 },
-      600:{ items:2 },
-      1000:{ items:4 }
-    }
+    responsive: {
+      0: { items: 1 },
+      600: { items: 2 },
+      1000: { items: 4 },
+    },
   });
 
-  $(".custom_next").click(function(){
+  $(".custom_next").click(function () {
     slider.trigger("next.owl.carousel");
   });
 
-  $(".custom_prev").click(function(){
+  $(".custom_prev").click(function () {
     slider.trigger("prev.owl.carousel");
   });
 
-  document.querySelectorAll(".customers_section .wishlist").forEach(btn => {
-  btn.addEventListener("click", function() {
-    this.classList.toggle("active");
+  document.querySelectorAll(".customers_section .wishlist").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      this.classList.toggle("active");
+    });
   });
-});
+
+  $('input[name="finish"]').on("change", function () {
+    let finish = $(this).next('span').text();
+    let color = $(this).closest('.card').find('h6').text();
+
+    $('#finish').text(finish);
+    $('#color').text(color);
+  });
 });
